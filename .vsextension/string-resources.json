@@ -1,0 +1,18 @@
+{
+  "Spectral.VisualStudio.Command1.DisplayName": "Spectral: Lint Current File",
+  "Spectral.VisualStudio.LintSolutionCommand.DisplayName": "Spectral: Lint Solution",
+  "Spectral.Settings.Category": "Spectral Linter",
+  "Spectral.Settings.Category.Description": "Configuration settings for the Spectral API linter extension.",
+  "Spectral.Settings.Enable": "Enable Spectral",
+  "Spectral.Settings.Enable.Description": "Controls whether Spectral linting is enabled for the workspace.",
+  "Spectral.Settings.RulesetFile": "Ruleset File",
+  "Spectral.Settings.RulesetFile.Description": "Path to the Spectral ruleset file (.spectral.yaml, .spectral.json, .spectral.yml, or .spectral.js). Leave empty to use the default ruleset in the workspace root or Spectral's built-in rules.",
+  "Spectral.Settings.RunMode": "Run Mode",
+  "Spectral.Settings.RunMode.Description": "Determines when Spectral linting runs: on file save or as you type.",
+  "Spectral.Settings.RunMode.OnSave": "On Save",
+  "Spectral.Settings.RunMode.OnType": "On Type",
+  "Spectral.Settings.ValidateFiles": "File Patterns",
+  "Spectral.Settings.ValidateFiles.Description": "Glob patterns for files to validate (e.g., **/*.yaml, **/*.json). Use ! prefix for exclusions (e.g., !**/node_modules/**).",
+  "Spectral.Settings.SpectralPath": "Spectral CLI Path",
+  "Spectral.Settings.SpectralPath.Description": "Path to the Spectral CLI executable. Use 'spectral' if installed globally via npm, or provide a full path."
+}

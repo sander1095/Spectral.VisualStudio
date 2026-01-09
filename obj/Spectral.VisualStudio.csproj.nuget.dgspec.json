@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\projects\\Personal\\spectral-vs\\Spectral.VisualStudio\\Spectral.VisualStudio.csproj": {}
+  },
+  "projects": {
+    "C:\\projects\\Personal\\spectral-vs\\Spectral.VisualStudio\\Spectral.VisualStudio.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\Personal\\spectral-vs\\Spectral.VisualStudio\\Spectral.VisualStudio.csproj",
+        "projectName": "Spectral.VisualStudio",
+        "projectPath": "C:\\projects\\Personal\\spectral-vs\\Spectral.VisualStudio\\Spectral.VisualStudio.csproj",
+        "packagesPath": "C:\\Users\\stenb\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\Personal\\spectral-vs\\Spectral.VisualStudio\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\stenb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "D:\\LocalNugetPackages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "Microsoft.VisualStudio.Extensibility.Build": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[17.14.40608, )"
+            },
+            "Microsoft.VisualStudio.Extensibility.Sdk": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[17.14.40608, )"
+            },
+            "Microsoft.VisualStudio.SDK": {
+              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[17.14.40265, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
