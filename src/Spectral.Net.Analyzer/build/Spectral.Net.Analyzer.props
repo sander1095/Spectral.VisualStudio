@@ -1,0 +1,36 @@
+<Project>
+  <!--
+    This file is automatically included in projects that reference the Spectral.Net.Analyzer
+    NuGet package. It exposes MSBuild properties to the Roslyn analyzer so they can be read
+    at compile time via AnalyzerConfigOptions.GlobalOptions.
+
+    Supported properties (all optional):
+      SpectralPath          – Path or name of the Spectral CLI executable.
+                              Default: "spectral" (must be on PATH).
+      SpectralRulesetFile   – Path or URL of the Spectral ruleset file.
+                              Default: auto-detected (.spectral.yaml/.yml/.json/.js).
+      SpectralEnabled       – Set to "false" to disable analysis entirely.
+                              Default: "true".
+
+    Example usage in a project file:
+      <PropertyGroup>
+        <SpectralPath>spectral</SpectralPath>
+        <SpectralRulesetFile>$(MSBuildProjectDirectory)\.spectral.yaml</SpectralRulesetFile>
+      </PropertyGroup>
+  -->
+
+  <PropertyGroup>
+    <SpectralPath      Condition="'$(SpectralPath)' == ''">spectral</SpectralPath>
+    <SpectralRulesetFile Condition="'$(SpectralRulesetFile)' == ''"></SpectralRulesetFile>
+    <SpectralEnabled   Condition="'$(SpectralEnabled)' == ''">true</SpectralEnabled>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Forward the properties into the Roslyn compilation so the analyzer can read them -->
+    <CompilerVisibleProperty Include="SpectralPath" />
+    <CompilerVisibleProperty Include="SpectralRulesetFile" />
+    <CompilerVisibleProperty Include="SpectralEnabled" />
+    <!-- MSBuildProjectDirectory lets the analyzer resolve relative paths at build time -->
+    <CompilerVisibleProperty Include="MSBuildProjectDirectory" />
+  </ItemGroup>
+</Project>

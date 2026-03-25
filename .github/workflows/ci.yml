@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # MinVer needs the full git history to resolve version from tags
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore Spectral.Net.Analyzer.slnx
+
+      - name: Build
+        run: dotnet build Spectral.Net.Analyzer.slnx --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test Spectral.Net.Analyzer.slnx --no-build --configuration Release --verbosity normal
+
+      - name: Pack
+        run: dotnet pack src/Spectral.Net.Analyzer/Spectral.Net.Analyzer.csproj --no-build --configuration Release --output nupkg
+
+      - name: Upload NuGet artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkg
+          path: nupkg/*.nupkg
