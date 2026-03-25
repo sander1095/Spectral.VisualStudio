@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/Spectral.Net.Analyzer/Spectral.Net.Analyzer.csproj" />
+  <Project Path="tests/Spectral.Net.Analyzer.Tests/Spectral.Net.Analyzer.Tests.csproj" />
+</Solution>

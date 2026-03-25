@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Required: Roslyn analyzer assemblies must not be included as regular references -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <!-- Required: tells .editorconfig consumers that this is an analyzer package -->
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <!-- Enforces Roslyn analyzer compatibility rules -->
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <!-- RS2007: Known tooling quirk with AnalyzerReleases.Unshipped.md "## Unreleased" header -->
+    <!-- NU5128: Expected for analyzer-only packages that intentionally have no lib/ folder -->
+    <NoWarn>$(NoWarn);RS2007;NU5128</NoWarn>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>Spectral.Net.Analyzer</PackageId>
+    <Authors>Sander ten Brinke</Authors>
+    <Description>A .NET Roslyn Analyzer that integrates the Spectral API linter into your build pipeline, reporting OpenAPI specification errors and warnings as build diagnostics.</Description>
+    <PackageTags>spectral;openapi;api;linting;roslyn;analyzer;dotnet;build</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/sander1095/Spectral.VisualStudio</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sander1095/Spectral.VisualStudio</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Source Link: embeds source in PDB so debuggers can step through analyzer code -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
+
+    <!-- Deterministic builds for reproducibility -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Roslyn analysis APIs (private: not exposed as a transitive dependency) -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" PrivateAssets="all" />
+    <!-- Source Link support for GitHub repositories -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
+    <!-- Git-tag-based versioning (MinVer reads 'v*' tags automatically) -->
+    <PackageReference Include="MinVer" Version="4.3.0" PrivateAssets="all" />
+    <!-- JSON parsing for Spectral CLI output (private, bundled into the package) -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" PrivateAssets="all" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Place the compiled analyzer DLL in the correct NuGet folder -->
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <!-- Bundle Newtonsoft.Json alongside the analyzer to avoid runtime resolution issues -->
+    <None Include="$(PkgNewtonsoft_Json)\lib\netstandard2.0\Newtonsoft.Json.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <!-- Include the MSBuild props so consumers get SpectralPath, SpectralRulesetFile, etc. -->
+    <None Include="build\Spectral.Net.Analyzer.props" Pack="true" PackagePath="build" />
+    <!-- Include README in the NuGet package -->
+    <None Include="..\..\README.md" Pack="true" PackagePath="" Link="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Required for RS2008: release tracking for diagnostic IDs -->
+    <AdditionalFiles Include="AnalyzerReleases.Shipped.md" />
+    <AdditionalFiles Include="AnalyzerReleases.Unshipped.md" />
+  </ItemGroup>
+</Project>
